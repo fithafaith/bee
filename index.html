@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>happiest birthday bee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Text:ital@0;1&family=Engagement&family=Jersey+10&family=Lavishly+Yours&family=Pacifico&family=Protest+Strike&family=Sarina&family=Stalinist+One&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("img/starrynight.jpg") center center / cover no-repeat;
+    filter: blur(8px);
+    transform: scale(1.08); 
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3); 
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(12px, 4vw, 20px);
+    width: 100%;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: clamp(40px, 12vw, 100px);
+    background: rgba(255, 224, 129, 0.4);
+    padding: clamp(16px, 4vw, 20px);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(14px, 4vw, 20px);
+    margin: 20px 0;
+    width: 100%;
+}
+
+.camera {
+    width: clamp(140px, 38vw, 250px);
+    height: clamp(120px, 30vw, 200px);
+    border-radius: clamp(24px, 8vw, 50px);
+    background: url("img/camera.png") center center / cover no-repeat;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0;
+    box-shadow: 0 0px 24px rgb(3, 7, 69);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(13px, 3vw, 16px);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: white;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.camera:hover,
+.letter:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 28px rgb(3, 7, 69);
+}
+
+.letter {
+    width: clamp(140px, 38vw, 250px);
+    height: clamp(120px, 30vw, 200px);
+    border-radius: clamp(24px, 8vw, 50px);
+    background: url("img/letter.jpg") center center / cover no-repeat;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0;
+    box-shadow: 0 0px 24px rgb(3, 7, 69);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(13px, 3vw, 16px);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: white;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.letter_header {
+    font-size: clamp(34px, 9vw, 90px);
+    color: #07123e;
+    font-weight: bold;
+    font-family: 'Lavishly Yours', cursive;
+    margin-bottom: 10px;
+}
+
+.music_box {
+    background-color: #071b6c;
+    box-shadow: 0 0 15px #e6b70c;
+    border-radius: 160px;
+    padding: clamp(11px, 3vw, 15px);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.music_box:hover {
+    transform: scale(1.05);
+    background-color: #0d1c5e;
+}
+
+.music_box.playing {
+    background-color: rgb(234, 187, 33);
+}
+
+.music_box img {
+    width: clamp(22px, 6vw, 30px);
+    height: clamp(22px, 6vw, 30px);
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.music_box.playing img {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.bot_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 3vw, 14px);
+    width: 100%;
+    max-width: 640px;
+    margin: 20px auto 0;
+    flex-wrap: wrap;
+}
+
+.player_controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 180px;
+    min-width: 0;
+    background: rgba(7, 18, 62, 0.25);
+    padding: 8px clamp(10px, 3vw, 14px);
+    border-radius: 30px;
+}
+
+.time_label {
+    font-size: clamp(10px, 2.5vw, 12px);
+    color: #07123e;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.seek_bar {
+    flex: 1;
+    min-width: 60px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 4px;
+    background: rgba(7, 18, 62, 0.35);
+    outline: none;
+    cursor: pointer;
+}
+
+.seek_bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgb(234, 187, 33);
+    box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+
+.seek_bar::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: rgb(234, 187, 33);
+    box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+
+.lyrics_btn {
+    background-color: #071b6c;
+    color: rgb(234, 187, 33);
+    box-shadow: 0 0 15px rgba(230, 183, 12, 0.5);
+    border-radius: 30px;
+    padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 22px);
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: clamp(12px, 3vw, 14px);
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.lyrics_btn:hover {
+    transform: scale(1.05);
+    background-color: #0d1c5e;
+}
+
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3, 7, 41, 0.75);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay_panel {
+    position: relative;
+    width: min(94%, 1000px);
+    height: min(90vh, 900px);
+    background: rgba(255, 224, 129, 0.97);
+    border-radius: clamp(14px, 3vw, 24px);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    padding: clamp(18px, 5vw, 40px);
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.overlay.active .overlay_panel {
+    transform: scale(1);
+}
+
+.overlay_close {
+    position: absolute;
+    top: clamp(10px, 3vw, 18px);
+    right: clamp(12px, 4vw, 22px);
+    background: #07123e;
+    color: rgb(234, 187, 33);
+    border: none;
+    width: clamp(34px, 8vw, 42px);
+    height: clamp(34px, 8vw, 42px);
+    border-radius: 50%;
+    font-size: clamp(18px, 4vw, 22px);
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.overlay_close:hover {
+    transform: rotate(90deg);
+    background-color: #0d1c5e;
+}
+
+.overlay_title {
+    font-family: 'Lavishly Yours', cursive;
+    font-size: clamp(26px, 6vw, 42px);
+    color: #07123e;
+    margin-bottom: clamp(12px, 3vw, 20px);
+    margin-right: clamp(40px, 10vw, 50px);
+    flex-shrink: 0;
+}
+
+.overlay_body {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.gallery_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: clamp(10px, 3vw, 18px);
+}
+
+.gallery_grid img {
+    width: 100%;
+    height: clamp(150px, 30vw, 220px);
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease;
+}
+
+.gallery_grid img:hover {
+    transform: scale(1.04);
+}
+
+.letter_text {
+    font-family: 'DM Serif Text', serif;
+    font-size: clamp(15px, 2.3vw, 20px);
+    line-height: 0.6;
+    color: #07123e;
+    text-align: left;
+    white-space: pre-line;
+}
+
+.letter_signoff {
+    margin-top: 24px;
+    font-family: 'Lavishly Yours', cursive;
+    font-size: clamp(22px, 5vw, 30px);
+    color: #07123e;
+    text-align: right;
+}
+
+.lyrics_line {
+    font-family: 'DM Serif Text', serif;
+    font-size: clamp(16px, 3.5vw, 22px);
+    line-height: 1.8;
+    color: rgba(7, 18, 62, 0.4);
+    text-align: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.lyrics_line.active {
+    color: #07123e;
+    font-weight: 700;
+    transform: scale(1.05);
+}
+
+.lyrics_line:hover {
+    color: #071b6c;
+}
+
+@media (max-width: 900px) {
+    .box {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 12px;
+    }
+    .box {
+        margin-top: 40px;
+        border-radius: 16px;
+    }
+    .bot_cont {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .player_controls {
+        width: 100%;
+        order: 1;
+    }
+    .music_box {
+        order: 0;
+        align-self: center;
+    }
+    .lyrics_btn {
+        order: 2;
+        align-self: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .cont {
+        flex-direction: column;
+    }
+    .camera,
+    .letter {
+        width: min(80vw, 250px);
+        height: min(64vw, 200px);
+    }
+}
+
+</style>
+<body>
+    <div class="container">
+        <header>
+        </header>
+        <main>
+            <div class="box">
+                <div class="letter_header">Happiest Birthday Bee</div>
+
+                <div class="cont">
+                    <button class="camera" id="cameraBtn" aria-label="Open photo gallery">press here</button>
+                    <button class="letter" id="letterBtn" aria-label="Open letter">press here</button>
+                </div>
+
+                <div class="bot_cont">
+                    <button class="music_box" id="musicBtn" aria-label="Play or pause song">
+                        <img src="img/music.png" alt="Music icon">
+                    </button>
+
+                    <div class="player_controls">
+                        <span class="time_label" id="currentTimeLabel">0:00</span>
+                        <input type="range" id="seekBar" class="seek_bar" value="0" min="0" max="100" step="0.1">
+                        <span class="time_label" id="durationLabel">0:00</span>
+                    </div>
+
+                    <button class="lyrics_btn" id="lyricsBtn" aria-label="Show lyrics">lyrics</button>
+                </div>
+
+            </div>
+        </main>
+        <footer>
+        </footer>
+    </div>
+
+    <div class="overlay" id="cameraOverlay">
+        <div class="overlay_panel">
+            <button class="overlay_close" id="cameraClose" aria-label="Close gallery">&times;</button>
+            <div class="overlay_title">Chéri</div>
+            <div class="overlay_body">
+                <div class="gallery_grid" id="galleryGrid">
+                    <img src="img/1.jpe" alt="Memory 1">
+                    <img src="img/2.jpe" alt="Memory 2">
+                    <img src="img/3.jpe" alt="Memory 3">
+                    <img src="img/4.jpe" alt="Memory 4">
+                    <img src="img/5.jpe" alt="Memory 5">
+                    <img src="img/6.jpe" alt="Memory 6">
+                    <img src="img/7.jpe" alt="Memory 7">
+                    <img src="img/8.jpe" alt="Memory 8">
+                    <img src="img/9.jpe" alt="Memory 9">
+                    <img src="img/10.jpe" alt="Memory 10">
+                    <img src="img/11.jpe" alt="Memory 11">
+                    <img src="img/12.jpe" alt="Memory 12">
+                    <img src="img/13.jpe" alt="Memory 1">
+                    <img src="img/13.5.jpe" alt="Memory 2">
+                    <img src="img/14.jpe" alt="Memory 3">
+                    <img src="img/14.5.jpe" alt="Memory 3">
+                    <img src="img/15.jpe" alt="Memory 4">
+                    <img src="img/16.jpe" alt="Memory 5">
+                    <img src="img/17.5.jpe" alt="Memory 6">
+                    <img src="img/17.jpe" alt="Memory 6">
+                    <img src="img/18.jpe" alt="Memory 7">
+                    <img src="img/19.jpe" alt="Memory 8">
+                    <img src="img/20.jpe" alt="Memory 9">
+                    <img src="img/21.jpe" alt="Memory 10">
+                    <img src="img/22.jpe" alt="Memory 11">
+                    <img src="img/23.jpe" alt="Memory 12">                 
+                    <img src="img/24.jpe" alt="Memory 5">
+                    <img src="img/25.jpe" alt="Memory 6">
+                    <img src="img/26.jpe" alt="Memory 7">
+                    <img src="img/27.jpe" alt="Memory 8">
+                    <img src="img/28.jpe" alt="Memory 9">
+                    <img src="img/29.jpe" alt="Memory 10">
+                    <img src="img/30.jpe" alt="Memory 11">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="letterOverlay">
+        <div class="overlay_panel">
+            <button class="overlay_close" id="letterClose" aria-label="Close letter">&times;</button>
+            <div class="overlay_title">À ma très chère, Joy</div>
+            <div class="overlay_body">
+                <div class="letter_text">
+                    <p>The one who personifies the ocean and the sky,</p>
+                    <p>Where depth and vastness embrace upon the horizon where you shine.</p>
+                    <p>May the winds blow you good fortune, may you always wear a smile.</p>
+                    <p>May you recall that everything with you is always worth my while.</p><br>
+                    <p>The one who points the limelight at everyone she values,</p>
+                    <p>While she submerges in the shadows where it is stripped of every hue.</p>
+                    <p>Yet you radiate amidst the darkness, you paint quite a wondrous view.</p>
+                    <p>Resilient and courageous, far more than you ever knew.</p><br>
+                    <p>The one who brings forth a symphony through the contagious joy she carries,</p>
+                    <p>Orchestrating nature's whimsical band, where even time itself tarries.</p>
+                    <p>You carry such a quite grace, even floods of praise you parry,</p>
+                    <p>Yet it illuminates the heart you bear and the kindness that you carry.</p><br>
+                    <p>You are beyond the echoes of the antaganostic void,</p>
+                    <p>Your value remains your truth and it will never be destroyed.</p>
+                    <p>You are full-fledged, always whole, no matter what's been coined,</p>
+                    <p>Your alluring mind will not be stained by the meek deceptions of the soil.</p><br>
+                    <p>May nature cradle your heart.</p>
+                    <p>May the stars make you smile,</p>
+                    <p>May the moon shine your path,</p>
+                    <p>May the trees dance for you,</p>
+                    <p>And may the sun keep you warm.</p><br>
+                    <p>May the rain sing you a lullaby,</p>
+                    <p>May the flowers bloom when you stride,</p>
+                    <p>May the ocean bring you peace,</p>
+                    <p>And may the grass be greener on your side.</p><br>
+                    <p>I hope the earth is gentle wherever you may be,</p>
+                    <p>I hope it softens the moment it acknowledges your proximity.</p>
+                    <p>I hope it's kind to you and longs to see you pleased,</p>
+                    <p>I hope the land stretches before you, where you may run so free.</p><br>
+                    <p>And when the light constantly flickers and the darkness prolongs,</p>
+                    <p>When your vision is obscured and everything feels wrong,</p>
+                    <p>When all is uncertain and your hands start to shake,</p>
+                    <p>When your voice loses its volume and your heart begins to ache,</p>
+                    <p>Come to Him and call His name for there's nothing He can't do,</p>
+                    <p>Every worry and every problem—all He will subdue,</p>
+                    <p>He is greater and beyond all the torments you,</p>
+                    <p>He's your Father and a Friend, who'll deliver you a breakthrough.</p><br>
+                    <p>You are far too broad and my words are far too vague,</p>
+                    <p>They fall too short—it feels like a severe mistake.</p><br>
+                    <p>You are far too vast and I'm far too flawed,</p>
+                    <p>My skills can't match the depth you hoard.</p>
+                    <p>Yet I'll try to paint you with my poems,</p>
+                    <p>Compose a piece with intent so solemn.</p><br>
+                    <p>Ineffable—that you are.</p>
+                    <p>Beyond each verse, my brightest star.</p><br>
+                </div>
+                <div class="letter_signoff">with love, Faith</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="lyricsOverlay">
+        <div class="overlay_panel">
+            <button class="overlay_close" id="lyricsClose" aria-label="Close lyrics">&times;</button>
+            <div class="overlay_title">Lyrics</div>
+            <div class="overlay_body" id="lyricsBody">
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function setupOverlay(triggerId, overlayId, closeId) {
+            const trigger = document.getElementById(triggerId);
+            const overlay = document.getElementById(overlayId);
+            const closeBtn = document.getElementById(closeId);
+
+            function open() {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function close() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            trigger.addEventListener('click', open);
+            closeBtn.addEventListener('click', close);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) close();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') close();
+            });
+        }
+
+        setupOverlay('cameraBtn', 'cameraOverlay', 'cameraClose');
+        setupOverlay('letterBtn', 'letterOverlay', 'letterClose');
+        setupOverlay('lyricsBtn', 'lyricsOverlay', 'lyricsClose');
+
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        const seekBar = document.getElementById('seekBar');
+        const currentTimeLabel = document.getElementById('currentTimeLabel');
+        const durationLabel = document.getElementById('durationLabel');
+        let isPlaying = false;
+        let isScrubbing = false;
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds === Infinity) return '0:00';
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                bgMusic.play().catch((err) => {
+                    console.error('Playback failed. Check that music/song.mp3 exists.', err);
+                });
+                musicBtn.classList.add('playing');
+                isPlaying = true;
+            } else {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+                isPlaying = false;
+            }
+        });
+
+        bgMusic.addEventListener('loadedmetadata', () => {
+            seekBar.max = bgMusic.duration;
+            durationLabel.textContent = formatTime(bgMusic.duration);
+        });
+
+        bgMusic.addEventListener('timeupdate', () => {
+            if (!isScrubbing) {
+                seekBar.value = bgMusic.currentTime;
+                currentTimeLabel.textContent = formatTime(bgMusic.currentTime);
+            }
+            updateActiveLyric(bgMusic.currentTime);
+        });
+
+        seekBar.addEventListener('input', () => {
+            isScrubbing = true;
+            currentTimeLabel.textContent = formatTime(seekBar.value);
+        });
+        seekBar.addEventListener('change', () => {
+            bgMusic.currentTime = seekBar.value;
+            isScrubbing = false;
+        });
+
+        const lyricsData = [
+            { time: 25,  text: "[instrumental]" },
+            { time: 26,  text: "I wish you find peace" },
+            { time: 33, text: "amidst the hurricane" },
+            { time: 39, text: "I wish you a calm sea" },
+            { time: 46, text: "despite the wind" },
+            { time: 54, text: "I wish you can hear" },
+            { time: 60, text: "the song of the rain" },
+            { time: 66, text: "I wish it can heal" },
+            { time: 74, text: "all of your pain" },
+            { time: 80, text: "I wish you can feel" },
+            { time: 87, text: "the breeze on a sunny day" },
+            { time: 95, text: "I hope it makes you feel okay" },
+            { time: 108, text: "I hope you see the stars" },
+            { time: 115, text: "and think of your scars" },
+            { time: 123, text: "then think of how" },
+            { time: 127, text: "beautiful they are" },
+            { time: 135, text: "don't you see the world" },
+            { time: 142, text: "smile at your face?" },
+            { time: 149, text: "don't you see the leaves" },
+            { time: 156, text: "fall in your grace?" },
+            { time: 163, text: "I hope you find the words" },
+            { time: 170, text: "of the things that haunts you most" },
+            { time: 176, text: "I hope you glue the letters" },
+            { time: 183, text: "inside of your thoughts" },
+        ];
+
+        const lyricsBody = document.getElementById('lyricsBody');
+        lyricsData.forEach((line, i) => {
+            const div = document.createElement('div');
+            div.className = 'lyrics_line';
+            div.id = 'lyric-' + i;
+            div.textContent = line.text;
+            div.addEventListener('click', () => {
+                bgMusic.currentTime = line.time;
+                if (!isPlaying) musicBtn.click();
+            });
+            lyricsBody.appendChild(div);
+        });
+
+        function updateActiveLyric(currentTime) {
+            let activeIndex = 0;
+            for (let i = 0; i < lyricsData.length; i++) {
+                if (currentTime >= lyricsData[i].time) activeIndex = i;
+                else break;
+            }
+            lyricsData.forEach((line, i) => {
+                const el = document.getElementById('lyric-' + i);
+                if (i === activeIndex) {
+                    el.classList.add('active');
+                    el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
