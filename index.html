@@ -607,9 +607,7 @@ body::after {
         </div>
     </div>
 
-    <audio id="bgMusic" loop>
-        <source src="music/song.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgMusic" loop preload="auto" src="music/song.mp3?v=2"></audio>
 
     <script>
         function setupOverlay(triggerId, overlayId, closeId) {
